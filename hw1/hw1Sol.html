@@ -221,8 +221,9 @@ ls -l /home/m280data/NYCHVS
 ```</code></pre>
 <p>Please, do <strong>not</strong> put these data files into Git; they are big. Also do <strong>not</strong> copy them into your directory. Just read from the data folder <code>/home/m280data/NYCHVS</code> directly. Use Bash commands to answer following questions.</p>
 <ol style="list-style-type: decimal">
-<li>Display the first few lines of <code>NYCHVS_1991.csv</code>. <strong>Solution</strong></li>
+<li>Display the first few lines of <code>NYCHVS_1991.csv</code>.</li>
 </ol>
+<p><strong>Solution</strong></p>
 <pre class="bash"><code>head /home/m280data/NYCHVS/NYCHVS_1991.csv</code></pre>
 <pre><code>## recordtype,borough,_d1,_d2,_d3,_d4,_d5,_d6,_e1,_e2,_e3,_e4,_e5,_f1,_f2,_f3,_f6,_f7,_g1,_g2,_g3,_g4,_g5,_g6,_h,_i,_1b,_1c,_1e,_1f,_2,_3,_4a,_4b,_5,_6,_7a,_7b,_7c,_8,_9a,_9c,_10a,_10b,_11a,_11b,_11c,_12a,_12a2,_12b,_12b2,_13,_14,_15a,_16,_17,_18a,_18b,_18c,_19a,_19b,_20,_21,_22a,_23a,_24a,_24b,_25a,_25b,_25c,_26a,_26b,_26c,_27,_28a1,_28a2,_28b1,_28b2,_28c,_28d1,_28d2,_28e1,_28e2,_29,_30a,_30b,_31a2,_32a,_32b,_33,_35a,_35c,_36a,_36b,_37a,_37b,_38a,_38,_39,_51,_52,_59a,_59b,_59c,_59d,_59e,_57,dhcrsif,psi,csr,scr,tsc,sro,ybr,hcr,npr,mgrent,hhinc,hhiwages,hhincf,hhiint,hhiss,hhissi,hhincdis,hhincva,sub,hhweight,seqn,year,linkage,sba,geo_id2
 ## Record Type,Borough,&quot;Condition of Exterior Walls: Missing brick, siding, or other outside wall materi&quot;,Condition of Exterior Walls: Sloping or bulging outside walls,Condition of Exterior Walls: Major cracks in outside walls,&quot;Condition of Exterior Walls: Loose or hanging cornice, roofing, or other materia&quot;,Condition of Exterior Walls: None of these problems with walls,Condition of Exterior Walls: Unable to observe walls,Condition of Windows: Broken or missing windows,Condition of Windows: Rotten/loose windows,Condition of Windows: Boarded up windows,Condition of Windows: None of these problems with windows,Condition of Windows: Unable to observe windows,&quot;Condition of Stairways (Exterior and Interior): Loose, broken, or missing stair &quot;,&quot;Condition of Stairways (Exterior and Interior): Loose, broken, or missing steps&quot;,Condition of Stairways (Exterior and Interior): None of these problems with stai,Condition of Stairways (Exterior and Interior): Unable to observe stairways,Condition of Stairways (Exterior and Interior): No stairways,Condition of floors: Sagging or sloping floors,Condition of floors: Slanted or shifted doorsills or door frames,Condition of floors: Deep wear in floors causing depressions,Condition of floors: Holes or missing flooring,Condition of floors: None of these problems with floors,Condition of floors: Unable to observe floors,Condition of building,Any buildings with broken or boarded up windows,Householder's Sex,Householder's Age Recode,Householder's Hispanic Origin,Householder's Race,Number of Persons from Temporary Residence,Most Recent Place Householder Lived For 6 Months or More,Year Householder Moved into Unit,Before or After July 1 1971,First Occupants of Unit,Reason for Moving,Place of Householder's Birth,Place of Householder's Father's Birth,Place of Householder's Mother's Birth,Condo Coop Status,Tenure 1,Tenure 2,Lived in unit at time of conversion,Condo Cooper Conversion done through Non-Evict Plan,Year Unit Acquired,Unit Occupancy Status before Acquisition,Condo coop before acquisition,Purchase Price 1,Purchase Price 2,Down Payment 1,Down Payment 2,Value,Mortgage Status,Monthly mortgage loan payments,Monthly condo or maintenance fee,Senior Citizen Carrying Charge Increase Exemption,Fire and Liability Insurance Paid Separately,Fire and Liability Insurance Costs (Prior Year),Fire and Liability Insurance Coverage on Personal Items,Real Estate Taxes paid separately,Prior Year Real Estate Taxes,Number of Units in Building,Owner in building,Stories in building,Passenger elevator in building,Number of rooms,Number of bedrooms,Complete plumbing facilities,Exclusive use of plumbing facilities,Toilet breakdowns,Kitchen facilities,Exclusive use of kitchen facilities,Kitchen facilities functioning,Type of heating fuel,Electricity paid separately,Monthly cost (electric),Gas paid separately,Monthly cost (gas),Combined gas and electric,Water and sewer paid separately,Yearly cost (water sewer),Other fuels paid separately,Yearly cost (other fuels),Length of Lease,Monthly contract rent,Rent Regulation Status (Respondent),Senior Citizen Rent Increase Exemption (SCRIE),Heating equipment breakdown,Number of heating equipment breakdowns,Additional source(s) of heat,Presence of mice or rats,Exterminator service,Cracks of holes in interior walls,Holes in floors,Broken plaster or peeling paint on inside walls,Broken plaster or peeling paint larger than 8 1/2 x 11,Water leakage inside apartment (house),Boarded up structures in neighborhood (Respondent),Respondent rating of residential structures in neighborhood,Public Assistance or Welfare Payments,&quot;Federal, State, or Local Government Payments for Rent (Rent Subsidy)&quot;,Householder was Householder in Previous Residence,Number of Rooms in Householder's Previous Address,Number of Persons in Previous Residence at Time of Move,Householder's Previous Residence Owned or Bought by Someone in Household,Householder's Previous Residence Rented,Monthly Rent for Previous Residence,DHCR Status Input Flag,Program Status Input,Control Status Recode,Structure class recode,Type of Schedule (Renter/Owner) Code,SRO Flag,Year Built Recode,Household Composition Recode,Number of Persons Recode,Monthly Gross Rent,Total Household Income Recode,&quot;Total Household Income from Wages, Salaries, Commissions, Bonuses, or Tips Recod&quot;,&quot;Household Income from Farm or Non-farm Business, Proprietorship, or Partnership &quot;,&quot;Household Income from Interest, Dividends, Net Rental, or Royalty Income Recode&quot;,Household Income from Social Security or Railroad Retirement Payments Recode,&quot;Household Income from SSI, AFDC/TANF, Home Relief, or Other Public Assistance or&quot;,&quot;Household Income from Retirement, Survivor, or Disability Pensions Recode&quot;,&quot;Household Income from VA Payments, Unemployment, Child Support, Alimony, or Othe&quot;,Sub-Borough Area,Household Sampling Weight (5 implied decimal places),Sequence Number,Year Identifier,Linkage Indicator,Borough and Sub-Borough Area,GEO.id2
@@ -235,8 +236,9 @@ ls -l /home/m280data/NYCHVS
 ## 1,2,9,9,9,9,1,9,9,9,9,1,9,9,9,1,9,9,9,9,9,9,1,9,2,2,1,54,1,1,0,3,70,9,2,99,10,15,15,1,9,2,9,9,99,9,9,9999999,9,9999999,9,9999999,9,9999,99,9,9,9999,9,9,99,10,2,6,1,4,3,0,3,2,0,4,1,1,2,999,2,999,999,2,999,2,9999,8,509,1,9,1,9,2,2,1,2,2,0,2,2,2,3,2,2,9,,,9,9,,2,12,5,3,12,9,4,3,3,509,29000,29000,999999,999999,999999,999999,999999,999999,18,18111626,104,91,1,218,3604009
 ## 1,2,9,9,9,9,1,9,9,9,9,1,9,9,9,1,9,9,9,9,9,9,1,9,2,2,1,60,1,2,0,3,89,9,2,20,10,10,10,3,1,9,9,9,89,5,1,35000,9,3500,9,40000,1,311,3,9,3,9999,9,3,99,11,1,6,1,2,1,0,3,2,0,4,1,1,2,999,2,999,999,2,999,2,9999,9,99999,9,9,1,9,2,2,2,2,2,1,9,2,2,3,2,9,1,,,0,4,,1,99,2,3,2,9,4,11,1,9999,25600,24600,999999,1000,999999,999999,999999,999999,18,15741748,105,91,1,218,3604009</code></pre>
 <ol style="list-style-type: decimal">
-<li>Display number of lines in each <code>csv</code> file. <strong>Solution</strong></li>
+<li>Display number of lines in each <code>csv</code> file.</li>
 </ol>
+<p><strong>Solution</strong></p>
 <pre class="bash"><code>wc -l /home/m280data/NYCHVS/*.csv</code></pre>
 <pre><code>##    14901 /home/m280data/NYCHVS/NYCHVS_1991.csv
 ##    15802 /home/m280data/NYCHVS/NYCHVS_1993.csv
@@ -250,8 +252,9 @@ ls -l /home/m280data/NYCHVS
 ##    13268 /home/m280data/NYCHVS/NYCHVS_2017.csv
 ##   156250 total</code></pre>
 <ol start="0" style="list-style-type: decimal">
-<li>Display the 3 files that have the least number of lines <strong>Solution</strong></li>
+<li>Display the 3 files that have the least number of lines</li>
 </ol>
+<p><strong>Solution</strong></p>
 <pre class="bash"><code>wc -l /home/m280data/NYCHVS/*.csv | sort | head -3</code></pre>
 <pre><code>##    13268 /home/m280data/NYCHVS/NYCHVS_2017.csv
 ##    14901 /home/m280data/NYCHVS/NYCHVS_1991.csv
@@ -261,13 +264,16 @@ ls -l /home/m280data/NYCHVS
 <pre class="bash"><code>for datafile in /home/m280data/NYCHVS/*.csv
   do
     ls $datafile
-  done</code></pre>
-<p><strong>Solution</strong> The output of the bash script is the following: /home/m280data/NYCHVS/NYCHVS_1991.csv /home/m280data/NYCHVS/NYCHVS_1993.csv /home/m280data/NYCHVS/NYCHVS_1996.csv /home/m280data/NYCHVS/NYCHVS_1999.csv /home/m280data/NYCHVS/NYCHVS_2002.csv /home/m280data/NYCHVS/NYCHVS_2005.csv /home/m280data/NYCHVS/NYCHVS_2008.csv /home/m280data/NYCHVS/NYCHVS_2011.csv /home/m280data/NYCHVS/NYCHVS_2014.csv /home/m280data/NYCHVS/NYCHVS_2017.csv</p></li>
+  done</code></pre></li>
 </ol>
+<p><strong>Solution</strong></p>
+<p>The output of the bash script is the following:</p>
+<p>/home/m280data/NYCHVS/NYCHVS_1991.csv /home/m280data/NYCHVS/NYCHVS_1993.csv /home/m280data/NYCHVS/NYCHVS_1996.csv /home/m280data/NYCHVS/NYCHVS_1999.csv /home/m280data/NYCHVS/NYCHVS_2002.csv /home/m280data/NYCHVS/NYCHVS_2005.csv /home/m280data/NYCHVS/NYCHVS_2008.csv /home/m280data/NYCHVS/NYCHVS_2011.csv /home/m280data/NYCHVS/NYCHVS_2014.csv /home/m280data/NYCHVS/NYCHVS_2017.csv</p>
 <p>The purpose of the script is to display all the file names with the extension “.csv” in the directory “/home/m280data/NYCHVS/”.</p>
 <ol start="0" style="list-style-type: decimal">
-<li>What unique values does the second variable <code>borough</code> take in <code>NYCHVS_1991.csv</code>? Tabulate how many times each value appears. <strong>Solution</strong></li>
+<li>What unique values does the second variable <code>borough</code> take in <code>NYCHVS_1991.csv</code>? Tabulate how many times each value appears.</li>
 </ol>
+<p><strong>Solution</strong></p>
 <pre class="bash"><code>cat /home/m280data/NYCHVS/NYCHVS_1991.csv | cut -d, -f 2| sort | uniq -c</code></pre>
 <pre><code>##    2271 1
 ##    4412 2
@@ -282,16 +288,17 @@ ls -l /home/m280data/NYCHVS
 <ol style="list-style-type: decimal">
 <li><p>You and your friend just have finished reading <em>Pride and Prejudice</em> by Jane Austen. Among the four main characters in the book, Elizabeth, Jane, Lydia, and Darcy, your friend thinks that Darcy was the most mentioned. You, however, are certain it was Elizabeth. Obtain the full text of the novel from <a href="https://www.gutenberg.org/files/1342/1342.txt" class="uri">https://www.gutenberg.org/files/1342/1342.txt</a> and save to your local folder.</p>
 <pre class="bash"><code>curl https://www.gutenberg.org/files/1342/1342.txt &gt; pride_and_prejudice.txt</code></pre>
-<p>Do <strong>not</strong> put this text file <code>pride_and_prejudice.txt</code> in Git. Using a <code>for</code> loop, how would you tabulate the number of times each of the four characters is mentioned? <strong>Solution</strong></p></li>
+<p>Do <strong>not</strong> put this text file <code>pride_and_prejudice.txt</code> in Git. Using a <code>for</code> loop, how would you tabulate the number of times each of the four characters is mentioned?</p></li>
 </ol>
-<pre class="bash"><code>for str in {Elizabeth,Jane,Lydia,Darcy}
+<p><strong>Solution</strong></p>
+<pre class="bash"><code>for str in {Elizabeth,Darcy,Jane,Lydia}
   do
   cat pride_and_prejudice.txt|grep -o $str|uniq -c
   done</code></pre>
-<pre><code>## cat: pride_and_prejudice.txt: No such file or directory
-## cat: pride_and_prejudice.txt: No such file or directory
-## cat: pride_and_prejudice.txt: No such file or directory
-## cat: pride_and_prejudice.txt: No such file or directory</code></pre>
+<pre><code>##     635 Elizabeth
+##     417 Darcy
+##     295 Jane
+##     170 Lydia</code></pre>
 <ol start="0" style="list-style-type: decimal">
 <li><p>What’s the difference between the following two commands?</p>
 <pre class="bash"><code>echo 'hello, world' &gt; test1.txt</code></pre>
