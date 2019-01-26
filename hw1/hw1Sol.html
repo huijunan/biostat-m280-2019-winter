@@ -202,12 +202,8 @@ $(document).ready(function () {
 <div id="q2.-linux-shell-commands" class="section level2">
 <h2>Q2. Linux Shell Commands</h2>
 <p>The <code>/home/m280data/NYCHVS</code> folder on teaching server contains a data set from the New York City Housing and Vacancy Survey. See <a href="https://www1.nyc.gov/site/hpd/about/nychvs-asa-data-challenge-expo.page">2019 ASA Data Challenge Expo</a> for further details.</p>
-<pre><code>```bash
-ls -l /home/m280data/NYCHVS
-```
-
-```
-## total 74960
+<pre class="bash"><code>ls -l /home/m280data/NYCHVS</code></pre>
+<pre><code>## total 74960
 ## -r--r--r--. 1 root root  5524433 Jan 17 03:51 NYCHVS_1991.csv
 ## -r--r--r--. 1 root root  5854176 Jan 17 03:52 NYCHVS_1993.csv
 ## -r--r--r--. 1 root root  6530552 Jan 17 03:52 NYCHVS_1996.csv
@@ -217,8 +213,7 @@ ls -l /home/m280data/NYCHVS
 ## -r--r--r--. 1 root root  8521473 Jan 17 03:52 NYCHVS_2008.csv
 ## -r--r--r--. 1 root root  7696926 Jan 17 03:52 NYCHVS_2011.csv
 ## -r--r--r--. 1 root root  6872681 Jan 17 03:52 NYCHVS_2014.csv
-## -r--r--r--. 1 root root 14821469 Jan 17 03:52 NYCHVS_2017.csv
-```</code></pre>
+## -r--r--r--. 1 root root 14821469 Jan 17 03:52 NYCHVS_2017.csv</code></pre>
 <p>Please, do <strong>not</strong> put these data files into Git; they are big. Also do <strong>not</strong> copy them into your directory. Just read from the data folder <code>/home/m280data/NYCHVS</code> directly. Use Bash commands to answer following questions.</p>
 <ol style="list-style-type: decimal">
 <li>Display the first few lines of <code>NYCHVS_1991.csv</code>.</li>
@@ -260,12 +255,12 @@ ls -l /home/m280data/NYCHVS
 ##    14901 /home/m280data/NYCHVS/NYCHVS_1991.csv
 ##    15344 /home/m280data/NYCHVS/NYCHVS_2014.csv</code></pre>
 <ol start="4" style="list-style-type: decimal">
-<li><p>What’s the output of following bash script?</p>
+<li>What’s the output of following bash script?</li>
+</ol>
 <pre class="bash"><code>for datafile in /home/m280data/NYCHVS/*.csv
   do
-    ls $datafile
-  done</code></pre></li>
-</ol>
+  ls $datafile
+  done</code></pre>
 <p><strong>Solution</strong></p>
 <p>The output of the bash script is the following:</p>
 <p>/home/m280data/NYCHVS/NYCHVS_1991.csv /home/m280data/NYCHVS/NYCHVS_1993.csv /home/m280data/NYCHVS/NYCHVS_1996.csv /home/m280data/NYCHVS/NYCHVS_1999.csv /home/m280data/NYCHVS/NYCHVS_2002.csv /home/m280data/NYCHVS/NYCHVS_2005.csv /home/m280data/NYCHVS/NYCHVS_2008.csv /home/m280data/NYCHVS/NYCHVS_2011.csv /home/m280data/NYCHVS/NYCHVS_2014.csv /home/m280data/NYCHVS/NYCHVS_2017.csv</p>
@@ -313,7 +308,7 @@ ls -l /home/m280data/NYCHVS
 # Select lines from the middle of a file.
 # Usage: bash middle.sh filename end_line num_lines
 head -n &quot;$2&quot; &quot;$1&quot; | tail -n &quot;$3&quot;</code></pre>
-<p>Using <code>chmod</code> make the file executable by the owner, and run</p></li>
+<p>Using <code>chmod</code> make the file executable by the owner, and run <strong>Solution</strong></p></li>
 </ol>
 <pre class="bash"><code>chmod 777 middle.sh</code></pre>
 <pre><code>```bash
@@ -321,7 +316,7 @@ head -n &quot;$2&quot; &quot;$1&quot; | tail -n &quot;$3&quot;</code></pre>
 ```</code></pre>
 <p>Explain the output. Explain the meaning of <code>&quot;$1&quot;</code>, <code>&quot;$2&quot;</code>, and <code>&quot;$3&quot;</code> in this shell script. Why do we need the first line of the shell script?</p>
 <p><strong>Solution</strong></p>
-<p>The output will show the last 5 lines from the first 20 lines of ‘pride_and_prejudice.txt’, which are the 16th to 20th lines. The output looks like this:</p>
+<p>The output will show the last 5 lines from the first 20 lines of “pride_and_prejudice.txt”, which are the 16th to 20th lines. The output looks like this:</p>
 <p>Language: English</p>
 <p>Character set encoding: ASCII</p>
 <p>The <code>&quot;$1&quot;</code>, <code>&quot;$2&quot;</code>, and <code>&quot;$3&quot;</code> are positional parameters “$1” means select the first argument ‘pride_and_prejudice’, “$2” means select the second argument ‘20’, “$3” means select the third argument ‘5’</p>
