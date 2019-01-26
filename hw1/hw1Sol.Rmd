@@ -131,6 +131,22 @@ chmod 777 middle.sh
     ```
 Explain the output. Explain the meaning of `"$1"`, `"$2"`, and `"$3"` in this shell script. Why do we need the first line of the shell script?
 
+**Solution**
+
+The output will show the last 5 lines from the first 20 lines of 'pride_and_prejudice.txt', which are the 16th to 20th lines. 
+The output looks like this:
+
+Language: English
+
+Character set encoding: ASCII
+
+
+The `"$1"`, `"$2"`, and `"$3"` are positional parameters
+"$1" means select the first argument 'pride_and_prejudice', 
+"$2" means select the second argument '20', 
+"$3" means select the third argument '5'
+
+
 ## Q4. R Batch Run
 
 In class we discussed using R to organize simulation studies. 
@@ -148,6 +164,13 @@ Rscript runSim.R
 ```
 
 2. Modify the [`autoSim.R`](http://hua-zhou.github.io/teaching/biostatm280-2019winter/slides/02-linux/autoSim.R) script to run simulations with combinations of sample sizes `nVals = seq(100, 500, by=100)` and distributions `distTypes = c("gaussian", "t1", "t5")` and write output to appropriately named files. Use `rep = 50`, and `seed = 280`. 
+
+**Solution**
+```{bash}
+cat autoSim.R
+Rscript autoSim.R
+```
+
 
 3. Write an R script to collect simulation results from output files and print average MSEs in a table of format
 

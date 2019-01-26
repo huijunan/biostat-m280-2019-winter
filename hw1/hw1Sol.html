@@ -304,25 +304,121 @@ ls -l /home/m280data/NYCHVS
 <pre class="bash"><code>echo 'hello, world' &gt; test1.txt</code></pre>
 <p>and</p>
 <pre class="bash"><code>echo 'hello, world' &gt;&gt; test2.txt</code></pre></li>
+</ol>
+<p><strong>Solution</strong></p>
+<p>The first command with “&gt;” will replace the original content in test1.txt with ‘hello, world’; whereas the second command with “&gt;&gt;” will add ‘hello, world’ to the original content in test2.txt.</p>
+<ol start="0" style="list-style-type: decimal">
 <li><p>Using your favorite text editor (e.g., <code>vi</code>), type the following and save the file as <code>middle.sh</code>:</p>
 <pre class="bash"><code>#!/bin/sh
 # Select lines from the middle of a file.
 # Usage: bash middle.sh filename end_line num_lines
 head -n &quot;$2&quot; &quot;$1&quot; | tail -n &quot;$3&quot;</code></pre>
-<p>Using <code>chmod</code> make the file executable by the owner, and run</p>
-<pre class="bash"><code>./middle.sh pride_and_prejudice.txt 20 5</code></pre>
-<p>Explain the output. Explain the meaning of <code>&quot;$1&quot;</code>, <code>&quot;$2&quot;</code>, and <code>&quot;$3&quot;</code> in this shell script. Why do we need the first line of the shell script?</p></li>
+<p>Using <code>chmod</code> make the file executable by the owner, and run</p></li>
 </ol>
+<pre class="bash"><code>chmod 777 middle.sh</code></pre>
+<pre><code>```bash
+./middle.sh pride_and_prejudice.txt 20 5
+```</code></pre>
+<p>Explain the output. Explain the meaning of <code>&quot;$1&quot;</code>, <code>&quot;$2&quot;</code>, and <code>&quot;$3&quot;</code> in this shell script. Why do we need the first line of the shell script?</p>
+<p><strong>Solution</strong></p>
+<p>The output will show the last 5 lines from the first 20 lines of ‘pride_and_prejudice.txt’, which are the 16th to 20th lines. The output looks like this:</p>
+<p>Language: English</p>
+<p>Character set encoding: ASCII</p>
+<p>The <code>&quot;$1&quot;</code>, <code>&quot;$2&quot;</code>, and <code>&quot;$3&quot;</code> are positional parameters “$1” means select the first argument ‘pride_and_prejudice’, “$2” means select the second argument ‘20’, “$3” means select the third argument ‘5’</p>
 </div>
 <div id="q4.-r-batch-run" class="section level2">
 <h2>Q4. R Batch Run</h2>
 <p>In class we discussed using R to organize simulation studies.</p>
 <ol style="list-style-type: decimal">
-<li><p>Expand the <a href="http://hua-zhou.github.io/teaching/biostatm280-2019winter/slides/02-linux/runSim.R"><code>runSim.R</code></a> script to include arguments <code>seed</code> (random seed), <code>n</code> (sample size), <code>dist</code> (distribution) and <code>rep</code> (number of simulation replicates). When <code>dist=&quot;gaussian&quot;</code>, generate data from standard normal; when <code>dist=&quot;t1&quot;</code>, generate data from t-distribution with degree of freedom 1 (same as Cauchy distribution); when <code>dist=&quot;t5&quot;</code>, generate data from t-distribution with degree of freedom 5. Calling <code>runSim.R</code> will (1) set random seed according to argument <code>seed</code>, (2) generate data according to argument <code>dist</code>, (3) compute the primed-indexed average estimator and the classical sample average estimator for each simulation replicate, (4) report the average mean squared error (MSE) <span class="math display">\[
+<li>Expand the <a href="http://hua-zhou.github.io/teaching/biostatm280-2019winter/slides/02-linux/runSim.R"><code>runSim.R</code></a> script to include arguments <code>seed</code> (random seed), <code>n</code> (sample size), <code>dist</code> (distribution) and <code>rep</code> (number of simulation replicates). When <code>dist=&quot;gaussian&quot;</code>, generate data from standard normal; when <code>dist=&quot;t1&quot;</code>, generate data from t-distribution with degree of freedom 1 (same as Cauchy distribution); when <code>dist=&quot;t5&quot;</code>, generate data from t-distribution with degree of freedom 5. Calling <code>runSim.R</code> will (1) set random seed according to argument <code>seed</code>, (2) generate data according to argument <code>dist</code>, (3) compute the primed-indexed average estimator and the classical sample average estimator for each simulation replicate, (4) report the average mean squared error (MSE) <span class="math display">\[
   \frac{\sum_{r=1}^{\text{rep}} (\widehat \mu_r - \mu_{\text{true}})^2}{\text{rep}}
-\]</span> for both methods.</p></li>
-<li><p>Modify the <a href="http://hua-zhou.github.io/teaching/biostatm280-2019winter/slides/02-linux/autoSim.R"><code>autoSim.R</code></a> script to run simulations with combinations of sample sizes <code>nVals = seq(100, 500, by=100)</code> and distributions <code>distTypes = c(&quot;gaussian&quot;, &quot;t1&quot;, &quot;t5&quot;)</code> and write output to appropriately named files. Use <code>rep = 50</code>, and <code>seed = 280</code>.</p></li>
-<li><p>Write an R script to collect simulation results from output files and print average MSEs in a table of format</p></li>
+\]</span> for both methods.</li>
+</ol>
+<p><strong>Solution</strong></p>
+<pre class="bash"><code>cat runSim.R
+Rscript runSim.R</code></pre>
+<pre><code>## ## parsing command arguments
+## for (arg in commandArgs(TRUE)) {
+##   eval(parse(text=arg))
+## }
+## 
+## ## check if a given integer is prime
+## isPrime = function(n) {
+##   if (n &lt;= 3) {
+##     return (TRUE)
+##   }
+##   if (any((n %% 2:floor(sqrt(n))) == 0)) {
+##     return (FALSE)
+##   }
+##   return (TRUE)
+## }
+## 
+## ## estimate mean only using observation with prime indices
+## estMeanPrimes = function(x) {
+##   n = length(x)
+##   ind = sapply(1:n, isPrime)
+##   return(mean(x[ind]))
+## }
+## 
+## ## simulate data
+## MSE &lt;- function(est, true, N) {
+##   return(sum((est - true)^2)/N)
+## }
+## 
+## Sim &lt;- function(seed, n, dist, rep) {
+##   set.seed(seed)
+##   if (dist == &quot;gaussian&quot;){
+##     x &lt;- replicate(rep, rnorm(n))
+##   }
+##   else if (dist == &quot;t1&quot;){
+##     x &lt;- replicate(rep, rt(n, df = 1))
+##   }
+##   else if (dist == &quot;t5&quot;){
+##     x &lt;- replicate(rep, rt(n, df = 5))
+##   }
+##   PrimeAvg &lt;- apply(x, 2, estMeanPrimes)
+##   SampAvg &lt;- apply(x, 2, mean)
+##   result &lt;- cbind(MSE(PrimeAvg, 0, rep), MSE(SampAvg, 0, rep))
+##   colnames(result) &lt;- c(&quot;PrimeMSE&quot;, &quot;SampMSE&quot;)
+##   return(result)
+## }</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Modify the <a href="http://hua-zhou.github.io/teaching/biostatm280-2019winter/slides/02-linux/autoSim.R"><code>autoSim.R</code></a> script to run simulations with combinations of sample sizes <code>nVals = seq(100, 500, by=100)</code> and distributions <code>distTypes = c(&quot;gaussian&quot;, &quot;t1&quot;, &quot;t5&quot;)</code> and write output to appropriately named files. Use <code>rep = 50</code>, and <code>seed = 280</code>.</li>
+</ol>
+<p><strong>Solution</strong></p>
+<pre class="bash"><code>cat autoSim.R
+Rscript autoSim.R</code></pre>
+<pre><code>## ## autoSim.R
+## nVals = seq(100, 500, by = 100)
+## distTypes = c(&quot;gaussian&quot;, &quot;t1&quot;, &quot;t5&quot;)
+## 
+## for (n in nVals) {
+##   for (dist in distTypes) {
+##     oFile &lt;- paste(&quot;n&quot;, n, &quot;dist&quot;, dist, &quot;.txt&quot;, sep = &quot;&quot;)
+##     sysCall &lt;- paste(&quot;nohup Rscript runSim.R n=&quot;, n, 
+##                      &quot; dist=&quot;, shQuote(shQuote(dist)), &quot; seed=280&quot;, &quot; rep=50&quot;,
+##                      &quot; &gt; &quot;, oFile, sep = &quot;&quot;)
+##     system(sysCall)
+##     print(paste(&quot;sysCall=&quot;, sysCall, sep = &quot;&quot;))
+##   }
+## }
+## [1] &quot;sysCall=nohup Rscript runSim.R n=100 dist=\&quot;'gaussian'\&quot; seed=280 rep=50 &gt; n100distgaussian.txt&quot;
+## [1] &quot;sysCall=nohup Rscript runSim.R n=100 dist=\&quot;'t1'\&quot; seed=280 rep=50 &gt; n100distt1.txt&quot;
+## [1] &quot;sysCall=nohup Rscript runSim.R n=100 dist=\&quot;'t5'\&quot; seed=280 rep=50 &gt; n100distt5.txt&quot;
+## [1] &quot;sysCall=nohup Rscript runSim.R n=200 dist=\&quot;'gaussian'\&quot; seed=280 rep=50 &gt; n200distgaussian.txt&quot;
+## [1] &quot;sysCall=nohup Rscript runSim.R n=200 dist=\&quot;'t1'\&quot; seed=280 rep=50 &gt; n200distt1.txt&quot;
+## [1] &quot;sysCall=nohup Rscript runSim.R n=200 dist=\&quot;'t5'\&quot; seed=280 rep=50 &gt; n200distt5.txt&quot;
+## [1] &quot;sysCall=nohup Rscript runSim.R n=300 dist=\&quot;'gaussian'\&quot; seed=280 rep=50 &gt; n300distgaussian.txt&quot;
+## [1] &quot;sysCall=nohup Rscript runSim.R n=300 dist=\&quot;'t1'\&quot; seed=280 rep=50 &gt; n300distt1.txt&quot;
+## [1] &quot;sysCall=nohup Rscript runSim.R n=300 dist=\&quot;'t5'\&quot; seed=280 rep=50 &gt; n300distt5.txt&quot;
+## [1] &quot;sysCall=nohup Rscript runSim.R n=400 dist=\&quot;'gaussian'\&quot; seed=280 rep=50 &gt; n400distgaussian.txt&quot;
+## [1] &quot;sysCall=nohup Rscript runSim.R n=400 dist=\&quot;'t1'\&quot; seed=280 rep=50 &gt; n400distt1.txt&quot;
+## [1] &quot;sysCall=nohup Rscript runSim.R n=400 dist=\&quot;'t5'\&quot; seed=280 rep=50 &gt; n400distt5.txt&quot;
+## [1] &quot;sysCall=nohup Rscript runSim.R n=500 dist=\&quot;'gaussian'\&quot; seed=280 rep=50 &gt; n500distgaussian.txt&quot;
+## [1] &quot;sysCall=nohup Rscript runSim.R n=500 dist=\&quot;'t1'\&quot; seed=280 rep=50 &gt; n500distt1.txt&quot;
+## [1] &quot;sysCall=nohup Rscript runSim.R n=500 dist=\&quot;'t5'\&quot; seed=280 rep=50 &gt; n500distt5.txt&quot;</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Write an R script to collect simulation results from output files and print average MSEs in a table of format</li>
 </ol>
 <table>
 <thead>
