@@ -29,10 +29,22 @@ The `/home/m280data/NYCHVS` folder on teaching server contains a data set from t
 Please, do **not** put these data files into Git; they are big. Also do **not** copy them into your directory. Just read from the data folder `/home/m280data/NYCHVS` directly. Use Bash commands to answer following questions.
 
 1. Display the first few lines of `NYCHVS_1991.csv`.
+**Solution**
+```{bash}
+head /home/m280data/NYCHVS/NYCHVS_1991.csv
+```
 
 1. Display number of lines in each `csv` file.
+**Solution**
+```{bash}
+wc -l /home/m280data/NYCHVS/*.csv
+```
 
 0. Display the 3 files that have the least number of lines
+**Solution**
+```{bash}
+wc -l /home/m280data/NYCHVS/*.csv | sort | head -3
+```
 
 0. What's the output of following bash script?
     ```{bash, eval=FALSE}
@@ -41,8 +53,27 @@ Please, do **not** put these data files into Git; they are big. Also do **not** 
         ls $datafile
       done
     ```
+**Solution**
+The output of the bash script is the following:
+/home/m280data/NYCHVS/NYCHVS_1991.csv
+/home/m280data/NYCHVS/NYCHVS_1993.csv
+/home/m280data/NYCHVS/NYCHVS_1996.csv
+/home/m280data/NYCHVS/NYCHVS_1999.csv
+/home/m280data/NYCHVS/NYCHVS_2002.csv
+/home/m280data/NYCHVS/NYCHVS_2005.csv
+/home/m280data/NYCHVS/NYCHVS_2008.csv
+/home/m280data/NYCHVS/NYCHVS_2011.csv
+/home/m280data/NYCHVS/NYCHVS_2014.csv
+/home/m280data/NYCHVS/NYCHVS_2017.csv
+
+The purpose of the script is to display all the file names with the extension ".csv" in the directory "/home/m280data/NYCHVS/".
 
 0. What unique values does the second variable `borough` take in `NYCHVS_1991.csv`? Tabulate how many times each value appears.
+**Solution**
+```{bash}
+cat /home/m280data/NYCHVS/NYCHVS_1991.csv | cut -d, -f 2| sort | uniq -c
+```
+
 
 ## Q3. More fun with shell
 
@@ -51,6 +82,14 @@ Please, do **not** put these data files into Git; they are big. Also do **not** 
     curl https://www.gutenberg.org/files/1342/1342.txt > pride_and_prejudice.txt
     ```
 Do **not** put this text file `pride_and_prejudice.txt` in Git. Using a `for` loop, how would you tabulate the number of times each of the four characters is mentioned?
+**Solution**
+```{bash}
+for str in {Elizabeth,Jane,Lydia,Darcy}
+  do
+  cat pride_and_prejudice.txt|grep -o $str|uniq -c
+  done
+```
+
 
 0. What's the difference between the following two commands?
     ```{bash eval=FALSE}
