@@ -1,5 +1,5 @@
 ---
-title: "Biostat M280 Homework 1"
+title: "Biostat M280 Homework 1 by Huijun An"
 subtitle: Due Jan 25 @ 11:59PM
 output: html_document
 ---
@@ -35,21 +35,21 @@ Please, do **not** put these data files into Git; they are big. Also do **not** 
 head /home/m280data/NYCHVS/NYCHVS_1991.csv
 ```
 
-1. Display number of lines in each `csv` file.
+2. Display number of lines in each `csv` file.
 
 **Solution**
 ```{bash}
 wc -l /home/m280data/NYCHVS/*.csv
 ```
 
-0. Display the 3 files that have the least number of lines
+3. Display the 3 files that have the least number of lines
 
 **Solution**
 ```{bash}
 wc -l /home/m280data/NYCHVS/*.csv | sort | head -3
 ```
 
-0. What's the output of following bash script?
+4. What's the output of following bash script?
     ```{bash, eval=FALSE}
     for datafile in /home/m280data/NYCHVS/*.csv
       do
@@ -74,7 +74,7 @@ The output of the bash script is the following:
 
 The purpose of the script is to display all the file names with the extension ".csv" in the directory "/home/m280data/NYCHVS/".
 
-0. What unique values does the second variable `borough` take in `NYCHVS_1991.csv`? Tabulate how many times each value appears.
+5. What unique values does the second variable `borough` take in `NYCHVS_1991.csv`? Tabulate how many times each value appears.
 
 **Solution**
 ```{bash}
@@ -99,7 +99,7 @@ for str in {Elizabeth,Darcy,Jane,Lydia}
 ```
 
 
-0. What's the difference between the following two commands?
+2. What's the difference between the following two commands?
     ```{bash eval=FALSE}
     echo 'hello, world' > test1.txt
     ```
@@ -110,11 +110,11 @@ for str in {Elizabeth,Darcy,Jane,Lydia}
 
 **Solution**
 
-The first command with ">" will replace the original content in test1.txt with 'hello, world';
+The first command with ">" will overwrite the original content in test1.txt with 'hello, world';
 whereas the second command with ">>" will add 'hello, world' to the original content in test2.txt.
 
 
-0. Using your favorite text editor (e.g., `vi`), type the following and save the file as `middle.sh`:
+3. Using your favorite text editor (e.g., `vi`), type the following and save the file as `middle.sh`:
     ```{bash eval=FALSE}
     #!/bin/sh
     # Select lines from the middle of a file.
@@ -160,7 +160,6 @@ for both methods.
 **Solution**
 ```{bash}
 cat runSim.R
-Rscript runSim.R
 ```
 
 2. Modify the [`autoSim.R`](http://hua-zhou.github.io/teaching/biostatm280-2019winter/slides/02-linux/autoSim.R) script to run simulations with combinations of sample sizes `nVals = seq(100, 500, by=100)` and distributions `distTypes = c("gaussian", "t1", "t5")` and write output to appropriately named files. Use `rep = 50`, and `seed = 280`. 
@@ -186,4 +185,10 @@ Rscript autoSim.R
 | 400 | SampAvg  |       |       |          |
 | 500 | PrimeAvg |       |       |          |
 | 500 | SampAvg  |       |       |          |
+
+**Solution**
+```{bash}
+cat Q4_3.R
+Rscript Q4_3.R
+```
 
