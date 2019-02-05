@@ -2,18 +2,15 @@
 title: "Biostat M280 Homework 2"
 subtitle: Due Feb 8 @ 11:59PM
 output: html_document
+name: Huijun An
+UID: 904499500
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-<p align="center">
-  <img src="./fizzbuzz.jpg" height="375">
-</p>
-
-**Solution**
-  develop branch build status:
+  develop branch build status:[![Build Status](https://travis-ci.com/huijunan/biostat-m280-2019-winter.svg?token=zTicFbMBPAEEe9msLo8r&branch=develop)](https://travis-ci.com/huijunan/biostat-m280-2019-winter)
   
   master branch build status: [![Build Status](https://travis-ci.com/huijunan/biostat-m280-2019-winter.svg?token=zTicFbMBPAEEe9msLo8r&branch=master)](https://travis-ci.com/huijunan/biostat-m280-2019-winter)
 
