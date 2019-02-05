@@ -20,9 +20,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 2. Set up Travis CI for your homework 2 solution, e.g., `hw2sol.Rmd`. Graders will look for a CI passing badge on the `README.Rmd` page of your repository:
 
-<p align="center">
-  <img src="./passing.svg" height="175">
-</p>
 
 
 ## Q2. FizzBuzz Test
@@ -44,4 +41,18 @@ The FizzBuzz test is a common programming interview question used to establish i
 1. Read the online book [_Rcpp For Everyone_](https://teuder.github.io/rcpp4everyone_en/) by Masaki E. Tsuda.
 
 2. Re-do FizzBuzz test using Rcpp. 
+**Solution**
+```{r}
+library(Rcpp)
+
+cppFunction('double sum_c(NumericVector x) {
+  int n = x.size();
+  double total = 0;
+  for(int i = 0; i < n; ++i) {
+    total += x[i];
+  }
+  return total;
+}')
+sum_c
+```
 
