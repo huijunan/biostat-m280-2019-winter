@@ -1,21 +1,15 @@
-Title: Paeoecological analysis using `neotoma`, an R package.
-Version: 1.6.2
-Date: 2016-09-21
-Author: Andria Dawson [aut, cre], Simon J. Goring [aut, cre]
-Authors@R: c(person(given = "Andria", family = "Dawson",
-                    role = c("aut", "cre"), email = "andria.dawson@gmail.com"),
-             person(given = c("Simon", "J."), family = "Goring",
-                    role = c("aut", "cre"), email = "goring@wisc.edu"))
-Maintainer: Simon J. Goring <goring@wisc.edu>
-  Description: A paper in progress for understanding age model construction in paleoecology.
-License: MIT + file LICENSE
-URL: https://github.com/palEON-Project/stepps-baconizing
-BugReports: https://github.com/palEON-Project/stepps-baconizing/issues
+Title: Hw2 Solution
+Date: 2019-02-05
+Author: Huijun An
+Author_UID: 904499500
+Description: A finalized solution for hw2 BIOS M280 Winter2019
+URL: https://github.com/huijunan/biostat-m280-2019-winter
+BugReports: https://github.com/huijunan/biostat-m280-2019-winter
 Depends:
   R (>= 2.10)
 Imports:
-  neotoma,
 rmarkdown,
+neotoma,
 purrr,
 ggplot2,
 plyr,
@@ -26,9 +20,4 @@ viridis,
 dplyr,
 readr,
 gridExtra,
-knitr,
-svglite,
-purrrlyr
-Suggests:
-  
-  RoxygenNote: 5.0.1
+rcpp
