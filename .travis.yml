@@ -19,6 +19,10 @@ r_packages:
   - dplyr
   - readr
   - gridExtra
+
+r_github_packages:
+  - hadley/devtools@efa894ffa
+
 os:
   - linux
   - osx
