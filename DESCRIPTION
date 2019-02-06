@@ -1,23 +1,13 @@
-Title: Hw2 Solution
-Date: 2019-02-05
-Author: Huijun An
-Author_UID: 904499500
-Description: A finalized solution for hw2 BIOS M280 Winter2019
-URL: https://github.com/huijunan/biostat-m280-2019-winter
-BugReports: https://github.com/huijunan/biostat-m280-2019-winter
+Title: Biostat M280 Homework 2
+subtitle: Due Feb 8 @ 11:59PM
+Version: 0.1.0
+output: html_document
+Authors@R: person("Huijun", "An", email = "huijun.an@gmail.com",
+    role = c("aut", "cre"))
+Description: Finish Winter2019 BIOS M280 HW2 
+    about Travis CI, github and FizzBuzz test on R and Rcpp.
 Depends:
-  R (>= 2.10)
+    R (>= 3.5.2)
 Imports:
-rmarkdown,
-neotoma,
-purrr,
-ggplot2,
-plyr,
-reshape2,
-mgcv,
-Bchron,
-viridis,
-dplyr,
-readr,
-gridExtra,
-rcpp
+    rmarkdown, Rcpp
+Encoding: UTF-8
