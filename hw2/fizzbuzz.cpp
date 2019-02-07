@@ -6,18 +6,18 @@ using namespace std;
 
 // [[Rcpp::export]]
 void RCPP_fizzbuzz(vector<int>& input){
-  for(unsigned i=0; i < input.size();i++){
+  for(unsigned i=1; i <= input.size();i++){
     if(i % 15 == 0){
-      cout << "FizzBuzz" << endl;
+      Rcout << "FizzBuzz" << endl;
     }
     else if(i % 3 == 0){
-      cout << "Fizz" << endl;
+      Rcout << "Fizz" << endl;
     }
     else if(i % 5 == 0){
-      cout << "Buzz" << endl;
+      Rcout << "Buzz" << endl;
     }
     else{
-      cout << (i) << endl;
+      Rcout << (i) << endl;
     }
   }
 }
