@@ -62,12 +62,16 @@ fizzbuzz("input")
 2. Re-do FizzBuzz test using Rcpp. 
 
 **Solution**
-```{bash}
+```{bash, warning = FALSE}
 cat fizzbuzz.cpp
 ```
-```{r}
-library(Rcpp)
+
+```{r,warning=FALSE}
+library("Rcpp")
 sourceCpp('fizzbuzz.cpp')
+```
+
+```{r}
 RCPP_fizzbuzz(1:15)
 ```
 
