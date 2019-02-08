@@ -214,20 +214,20 @@ $(document).ready(function () {
 <pre class="r"><code>fizzbuzz &lt;- function(x) {
   if (is.numeric(x) == FALSE) {
     print(&quot;not valid input, please try again&quot;)
-    return(NULL)
+    return (NULL)
   }
   for (i in 1:length(x)) {
     if (x[i] %% 1 != 0){
       print (&quot;not valid input, please try again&quot;)
-      return(NULL)
+      return (NULL)
     }
     if (x[i] %% 15 == 0) {print(&quot;FizzBuzz&quot;)}
-    else if(x[i] %% 3 == 0) {print(&quot;Fizz&quot;)}
-    else if(x[i] %% 5 == 0) {print(&quot;Buzz&quot;)}
+    else if (x[i] %% 3 == 0) {print(&quot;Fizz&quot;)}
+    else if (x[i] %% 5 == 0) {print(&quot;Buzz&quot;)}
     else print(x[i])
   }
 }
-fizzbuzz(c(1,3,5,15,16))</code></pre>
+fizzbuzz(c(1, 3, 5, 15, 16))</code></pre>
 <pre><code>## [1] 1
 ## [1] &quot;Fizz&quot;
 ## [1] &quot;Buzz&quot;
@@ -258,7 +258,7 @@ fizzbuzz(c(1,3,5,15,16))</code></pre>
 <pre class="r"><code>fizzbuzz(c(&quot;bad input&quot;, 15))</code></pre>
 <pre><code>## [1] &quot;not valid input, please try again&quot;</code></pre>
 <pre><code>## NULL</code></pre>
-<p>My approach to the problem: A function fulfilling the requirement in this question need to be constructed and to react to different list of numbers of input. In order to be able to print a list of numbers, a for loop is used for R to be able to print out the list as desired. As of requirements for the list, the first requirement is that we would like the input to be only integer numbers, so that character &amp; non-integer input will be invalid which is fulfilled by if statement. Then the next requirement is the fizzbuzz requirement, that is multiples of 3 print as fizz, multiples of 5 print as buzz, multiples of 15 print as fizzbuzz. This is also fulfilled by if…else statement. After we constructed the function, we test the function with several input that includes with integers, non-integers and characters and conclude that the function is constructed successfully.</p>
+<p>My approach to the problem: A function fulfilling the requirement in this question need to be constructed and to react to different list of numbers of input. In order to be able to print a list of numbers, a (for loop) is used for R to be able to print out the list as desired. As of requirements for the list, the first requirement is that we would like the input to be only integer numbers, so that character &amp; non-integer input will be invalid which is fulfilled by if statement. Then the next requirement is the fizzbuzz requirement, that is multiples of 3 print as fizz, multiples of 5 print as buzz, multiples of 15 print as fizzbuzz. This is also fulfilled by (if…else) statement. After we constructed the function, we test the function with several input that includes with integers, non-integers and characters and conclude that the function is constructed successfully.</p>
 </div>
 <div id="q3.-rcpp" class="section level2">
 <h2>Q3. Rcpp</h2>
@@ -279,19 +279,19 @@ fizzbuzz(c(1,3,5,15,16))</code></pre>
 ## 
 ## // [[Rcpp::export]]
 ## void RCPP_fizzbuzz(vector&lt;double&gt; &amp; input){
-##   for(unsigned i = 0; i &lt; input.size(); i++){
-##     if(input[i] != floor(input[i])){
+##   for (unsigned i = 0; i &lt; input.size(); i++){
+##     if (input[i] != floor(input[i])){
 ##       Rcout &lt;&lt; &quot;not valid input, please try again&quot; &lt;&lt; endl;
 ##       return;
 ##     }
 ##     int iter = int(input[i]);
-##     if(iter % 15 == 0){
+##     if (iter % 15 == 0){
 ##       Rcout &lt;&lt; &quot;FizzBuzz&quot; &lt;&lt; endl;
 ##     }
-##     else if(iter  % 3 == 0){
+##     else if (iter  % 3 == 0){
 ##       Rcout &lt;&lt; &quot;Fizz&quot; &lt;&lt; endl;
 ##     }
-##     else if(iter  % 5 == 0){
+##     else if (iter  % 5 == 0){
 ##       Rcout &lt;&lt; &quot;Buzz&quot; &lt;&lt; endl;
 ##     }
 ##     else{
@@ -303,12 +303,12 @@ fizzbuzz(c(1,3,5,15,16))</code></pre>
 sourceCpp('fizzbuzz.cpp')</code></pre>
 <pre class="r"><code>Q3_fizzbuzz &lt;- function(x) {
   if (is.numeric(x) == FALSE) {
-    print(&quot;not valid input, please try again&quot;)
-    return(NULL)
+    print (&quot;not valid input, please try again&quot;)
+    return (NULL)
   }
-  else print(RCPP_fizzbuzz(x))
+  else print (RCPP_fizzbuzz(x))
 }
-Q3_fizzbuzz(c(1,3,5,15,16))</code></pre>
+Q3_fizzbuzz(c(1, 3, 5, 15, 16))</code></pre>
 <pre><code>## 1
 ## Fizz
 ## Buzz
