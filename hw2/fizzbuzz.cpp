@@ -3,21 +3,29 @@
 #include <iostream>
 using namespace Rcpp;
 using namespace std;
+int main()
+{
+}
 
 // [[Rcpp::export]]
-void RCPP_fizzbuzz(vector<int>& input){
-  for(unsigned i=1; i <= input.size();i++){
-    if(i % 15 == 0){
+void RCPP_fizzbuzz(vector<double> & input){
+  for(unsigned i = 0; i < input.size(); i++){
+    if(input[i] != floor(input[i])){
+      Rcout << "not valid input, please try again" << endl;
+      return;
+    }
+    int iter = int(input[i]);
+    if(iter % 15 == 0){
       Rcout << "FizzBuzz" << endl;
     }
-    else if(i % 3 == 0){
+    else if(iter  % 3 == 0){
       Rcout << "Fizz" << endl;
     }
-    else if(i % 5 == 0){
+    else if(iter  % 5 == 0){
       Rcout << "Buzz" << endl;
     }
     else{
-      Rcout << (i) << endl;
+      Rcout << iter  << endl;
     }
   }
 }

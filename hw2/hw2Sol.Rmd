@@ -1,24 +1,22 @@
 ---
-title: "Biostat M280 Homework 2"
+title: "Biostat M280 Homework 2 by Huijun An"
 subtitle: Due Feb 8 @ 11:59PM
 output: html_document
-name: Huijun An
-UID: 904499500
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-  develop branch build status:[![Build Status](https://travis-ci.com/huijunan/biostat-m280-2019-winter.svg?token=zTicFbMBPAEEe9msLo8r&branch=develop)](https://travis-ci.com/huijunan/biostat-m280-2019-winter)
-  
-  master branch build status: [![Build Status](https://travis-ci.com/huijunan/biostat-m280-2019-winter.svg?token=zTicFbMBPAEEe9msLo8r&branch=master)](https://travis-ci.com/huijunan/biostat-m280-2019-winter)
-
 ## Q1. Travis CI
 
 1. Read the blog post [_Adding CI To RMarkdown Documents_](http://www.goring.org/resources/Adding_CI_To_RMarkdown.html) by Simon Goring. Understand what is continuous integration (CI) and why we need CI.
 
 2. Set up Travis CI for your homework 2 solution, e.g., `hw2sol.Rmd`. Graders will look for a CI passing badge on the `README.Rmd` page of your repository:
+
+  develop branch build status:[![Build Status](https://travis-ci.com/huijunan/biostat-m280-2019-winter.svg?token=zTicFbMBPAEEe9msLo8r&branch=develop)](https://travis-ci.com/huijunan/biostat-m280-2019-winter)
+  
+  master branch build status: [![Build Status](https://travis-ci.com/huijunan/biostat-m280-2019-winter.svg?token=zTicFbMBPAEEe9msLo8r&branch=master)](https://travis-ci.com/huijunan/biostat-m280-2019-winter)
 
 
 
@@ -39,21 +37,28 @@ The FizzBuzz test is a common programming interview question used to establish i
 **Solution**
 ```{r}
 fizzbuzz <- function(x) {
-  if (is.integer(x) == FALSE) {
-    print("non-numeric input, please try again")
+  if (is.numeric(x) == FALSE) {
+    print("not valid input, please try again")
     return(NULL)
   }
   for (i in 1:length(x)) {
+    if (x[i] %% 1 != 0){
+      print ("not valid input, please try again")
+      return(NULL)
+    }
     if (x[i] %% 15 == 0) {print("FizzBuzz")}
     else if(x[i] %% 3 == 0) {print("Fizz")}
     else if(x[i] %% 5 == 0) {print("Buzz")}
     else print(x[i])
   }
 }
+fizzbuzz(c(1,3,5,15,16))
 fizzbuzz(1:15)
-fizzbuzz("input")
+fizzbuzz("bad input")
+fizzbuzz(c(13.45, 15))
+fizzbuzz(c("bad input", 15))
 ```
-
+My approach to the problem: A function fulfilling the requirement in this question need to be constructed and to react to different list of numbers of input. In order to be able to print a list of numbers, a for loop is used for R to be able to print out the list as desired. As of requirements for the list, the first requirement is that we would like the input to be only integer numbers, so that character & non-integer input will be invalid which is fulfilled by if statement. Then the next requirement is the fizzbuzz requirement, that is multiples of 3 print as fizz, multiples of 5 print as buzz, multiples of 15 print as fizzbuzz. This is also fulfilled by if...else statement. After we constructed the function, we test the function with several input that includes with integers, non-integers and characters and conclude that the function is constructed successfully.
 
 ## Q3. Rcpp
 
@@ -73,12 +78,16 @@ sourceCpp('fizzbuzz.cpp')
 
 ```{r}
 Q3_fizzbuzz <- function(x) {
-  if (is.integer(x) == FALSE) {
-    print("non-numeric input, please try again")
+  if (is.numeric(x) == FALSE) {
+    print("not valid input, please try again")
     return(NULL)
   }
   else print(RCPP_fizzbuzz(x))
 }
+Q3_fizzbuzz(c(1,3,5,15,16))
 Q3_fizzbuzz(1:15)
+Q3_fizzbuzz("bad input")
+Q3_fizzbuzz(c(13.45, 15))
+Q3_fizzbuzz(c("bad input", 15))
 ```
 
