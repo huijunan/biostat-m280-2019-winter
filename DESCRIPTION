@@ -1,0 +1,13 @@
+Title: Biostat M280 Homework 2
+subtitle: Due Feb 8 @ 11:59PM
+Version: 0.1.0
+output: html_document
+Authors@R: person("Huijun", "An", email = "huijun.an@gmail.com",
+    role = c("aut", "cre"))
+Description: Finish Winter2019 BIOS M280 HW2 
+    about Travis CI, github and FizzBuzz test on R and Rcpp.
+Depends:
+    R (>= 3.5.2)
+Imports:
+    rmarkdown, Rcpp
+Encoding: UTF-8
