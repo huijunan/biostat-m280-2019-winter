@@ -46,7 +46,6 @@ The SQLite database `/home/m280data/la_parking/LA_Parking_Citations.sqlite` on t
 ```{r}
 library("DBI")
 library("RSQLite")
-con = dbConnect(RSQLite::SQLite(), "/home/m280data/la_parking/LA_Parking_Citations.sqlite")
 
 library("dplyr")
 library("dbplyr")
@@ -60,6 +59,73 @@ head(PC, n = 10)
 ```{r}
 PC %>% summarize(n())
 ```
+
+```{sql connection="citation"}
+SELECT Issue_DateTime FROM latix 
+WHERE Issue_DateTime IS NOT NULL
+ORDER BY Issue_DateTime DESC LIMIT 1
+```
+```{sql connection="citation"}
+SELECT Issue_DateTime FROM latix 
+WHERE Issue_DateTime IS NOT NULL
+ORDER BY Issue_DateTime ASC LIMIT 1
+```
+```{sql connection="citation"}
+SELECT Issue_Year, Issue_Month, Issue_Day, Issue_Hour, Issue_Minute FROM latix 
+WHERE Issue_DateTime == 1548460680		
+```
+```{sql connection="citation"}
+SELECT Issue_Year, Issue_Month, Issue_Day, Issue_Hour, Issue_Minute FROM latix 
+WHERE Issue_DateTime == 1435798800		
+```
+
+```{sql connection= "citation"}
+SELECT Issue_Year FROM latix 
+WHERE Issue_Year IS NOT NULL
+ORDER BY Issue_Year DESC LIMIT 1
+```
+
+
+```{sql connection="citation"}
+SELECT Issue_Year FROM latix 
+WHERE Issue_Year IS NOT NULL
+ORDER BY Issue_Year ASC LIMIT 1
+```
+```{sql connection="citation"}
+SELECT Issue_Month FROM latix 
+WHERE Issue_Month IS NOT NULL 
+AND Issue_Year == 2015
+ORDER BY Issue_Month ASC LIMIT 1
+```
+```{sql connection="citation"}
+SELECT Issue_Day FROM latix 
+WHERE Issue_Day IS NOT NULL 
+AND Issue_Month == 7
+AND Issue_Year == 2015
+ORDER BY Issue_Day ASC LIMIT 1
+```
+```{sql connection="citation"}
+SELECT Issue_Hour FROM latix 
+WHERE Issue_Hour IS NOT NULL
+AND Issue_Day == 2
+AND Issue_Month == 7
+AND Issue_Year == 2015
+ORDER BY Issue_Hour ASC LIMIT 1
+```
+```{sql connection="citation"}
+SELECT Issue_Minute FROM latix 
+WHERE Issue_Minute IS NOT NULL
+AND Issue_Hour == 1
+AND Issue_Day == 2
+AND Issue_Month == 7
+AND Issue_Year == 2015
+ORDER BY Issue_Minute ASC LIMIT 1
+```
+
+```{sql connection="citation"}
+SELECT count(*) FROM latix GROUP BY Issue_Year
+```
+
 0. When (which hour, weekday, month day, and month) are you most likely to get a ticket and when are you least likely to get a ticket?
 
 0. Which car makes received most citations?
