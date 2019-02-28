@@ -79,63 +79,100 @@ SELECT Issue_Year, Issue_Month, Issue_Day, Issue_Hour, Issue_Minute FROM latix
 WHERE Issue_DateTime == 1435798800		
 ```
 
-```{sql connection= "citation"}
-SELECT Issue_Year FROM latix 
+```{sql connection="citation"}
+SELECT count(*), Issue_Year FROM latix 
 WHERE Issue_Year IS NOT NULL
-ORDER BY Issue_Year DESC LIMIT 1
-```
-
-
-```{sql connection="citation"}
-SELECT Issue_Year FROM latix 
-WHERE Issue_Year IS NOT NULL
-ORDER BY Issue_Year ASC LIMIT 1
-```
-```{sql connection="citation"}
-SELECT Issue_Month FROM latix 
-WHERE Issue_Month IS NOT NULL 
-AND Issue_Year == 2015
-ORDER BY Issue_Month ASC LIMIT 1
-```
-```{sql connection="citation"}
-SELECT Issue_Day FROM latix 
-WHERE Issue_Day IS NOT NULL 
-AND Issue_Month == 7
-AND Issue_Year == 2015
-ORDER BY Issue_Day ASC LIMIT 1
-```
-```{sql connection="citation"}
-SELECT Issue_Hour FROM latix 
-WHERE Issue_Hour IS NOT NULL
-AND Issue_Day == 2
-AND Issue_Month == 7
-AND Issue_Year == 2015
-ORDER BY Issue_Hour ASC LIMIT 1
-```
-```{sql connection="citation"}
-SELECT Issue_Minute FROM latix 
-WHERE Issue_Minute IS NOT NULL
-AND Issue_Hour == 1
-AND Issue_Day == 2
-AND Issue_Month == 7
-AND Issue_Year == 2015
-ORDER BY Issue_Minute ASC LIMIT 1
-```
-
-```{sql connection="citation"}
-SELECT count(*) FROM latix GROUP BY Issue_Year
+GROUP BY Issue_Year
+ORDER BY count(*) DESC LIMIT 1
 ```
 
 0. When (which hour, weekday, month day, and month) are you most likely to get a ticket and when are you least likely to get a ticket?
+```{sql connection="citation"}
+SELECT count(*), Issue_Hour FROM latix GROUP BY Issue_Hour
+ORDER BY count(*) DESC LIMIT 1
+```
+```{sql connection="citation"}
+SELECT count(*), Issue_Wday FROM latix GROUP BY Issue_Wday
+ORDER BY count(*) DESC LIMIT 1
+```
+```{sql connection="citation"}
+SELECT count(*), Issue_Month FROM latix GROUP BY Issue_Month
+ORDER BY count(*) DESC LIMIT 1
+```
+```{sql connection="citation"}
+SELECT count(*), Issue_Day FROM latix GROUP BY Issue_Day
+ORDER BY count(*) DESC LIMIT 1
+```
+
+```{sql connection="citation"}
+SELECT count(*), Issue_Hour FROM latix GROUP BY Issue_Hour
+ORDER BY count(*) ASC LIMIT 1
+```
+```{sql connection="citation"}
+SELECT count(*), Issue_Wday FROM latix 
+WHERE Issue_Wday IS NOT NULL
+GROUP BY Issue_Wday
+ORDER BY count(*) ASC LIMIT 1
+```
+```{sql connection="citation"}
+SELECT count(*), Issue_Month FROM latix 
+WHERE Issue_Month IS NOT NULL
+GROUP BY Issue_Month
+ORDER BY count(*) ASC LIMIT 1
+```
+```{sql connection="citation"}
+SELECT count(*), Issue_Day FROM latix 
+WHERE Issue_Day IS NOT NULL
+GROUP BY Issue_Day
+ORDER BY count(*) ASC LIMIT 1
+```
 
 0. Which car makes received most citations?
+```{sql connection="citation"}
+SELECT count(*), Make FROM latix 
+WHERE Make IS NOT NULL
+GROUP BY Make
+ORDER BY count(*) DESC LIMIT 1
+```
 
 0. How many different colors of cars were ticketed? Which color attracted most tickets?
+```{sql connection="citation"}
+Select Count(*)
+From(
+    SELECT count(*), Color FROM latix 
+    WHERE Color IS NOT NULL
+    GROUP BY Color
+) As Color
+```
+```{sql connection="citation"}
+SELECT count(*), Color FROM latix 
+WHERE Color IS NOT NULL
+GROUP BY Color
+ORDER BY count(*) DESC LIMIT 1
+```
 
 0. What are the most common ticket types?
+```{sql connection="citation"}
+SELECT count(*), Violation_Code, Violation_Description FROM latix 
+WHERE Violation_Code IS NOT NULL
+GROUP BY Violation_Code
+ORDER BY count(*) DESC LIMIT 1
+```
 
 0. How much money was collected on parking tickets in 2016, 2017 and 2018?
+```{sql connection="citation"}
+SELECT sum(Fine_amount), Issue_Year FROM latix 
+WHERE Issue_Year == 2016
+OR Issue_Year == 2017
+OR Issue_Year == 2018
+GROUP BY Issue_Year
+```
+
 
 0. If you've been ticketed in LA County, did you find your ticket in this data set?
+
+**Solution**
+Never been ticketed in LA County, Proud of myself!
+
 
 0. Read the blog <http://www.brettrics.com/9-million-parking-tickets-la/> and try to reproduce plots using your data.
