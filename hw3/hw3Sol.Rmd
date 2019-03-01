@@ -49,15 +49,27 @@ library("RSQLite")
 
 library("dplyr")
 library("dbplyr")
-citation <- DBI::dbConnect(RSQLite::SQLite(), "/home/m280data/la_parking/LA_Parking_Citations.sqlite")
-src_dbi(citation)
-PC <- tbl(citation, "latix")
-head(PC, n = 10)
+citation <- dbConnect(RSQLite::SQLite(), dbname = "/home/m280data/la_parking/LA_Parking_Citations.sqlite")
+dbListTables(citation)
+
+
+PC_sql <- dplyr::tbl(citation, "latix")
+str(PC_sql)
+PC_sql %>% print(width = Inf)
 ```
 
 1. How many tickets are in this data set? Which time period do these tickets span? Which years have most data?
 ```{r}
-PC %>% summarize(n())
+PC_sql %>% summarize(n())
+```
+```{r}
+library(ggplot2)
+PC_sql %>% 
+  group_by (Issue_Year) %>% 
+  filter(is.na(Issue_Year)==F) %>%
+  summarize(n = n()) %>%
+  ggplot() + 
+    geom_col(aes(x = Issue_Year, y = n))
 ```
 
 ```{sql connection="citation"}
@@ -87,6 +99,60 @@ ORDER BY count(*) DESC LIMIT 1
 ```
 
 0. When (which hour, weekday, month day, and month) are you most likely to get a ticket and when are you least likely to get a ticket?
+```{r}
+library(ggplot2)
+PC_sql %>% 
+  group_by (Issue_Hour) %>% 
+  filter(is.na(Issue_Hour)==F) %>%
+  summarize(n = n()) %>%
+  ggplot() + 
+    geom_col(aes(x = Issue_Hour, y = n)) +
+    geom_text(aes(x = Issue_Hour, y = n, label = n))
+
+PC_sql %>% 
+  group_by (Issue_Wday) %>% 
+  filter(is.na(Issue_Wday)==F) %>%
+  summarize(n = n()) %>%
+  ggplot() + 
+    geom_col(aes(x = Issue_Wday, y = n)) +
+    geom_text(aes(x = Issue_Wday, y = n, label = n))
+
+PC_sql %>% 
+  group_by (Issue_Month) %>% 
+  filter(is.na(Issue_Month)==F) %>%
+  summarize(n = n()) %>%
+  ggplot() + 
+    geom_col(aes(x = Issue_Month, y = n)) +
+    geom_text(aes(x = Issue_Month, y = n, label = n))
+```
+```{r}
+PC_sql %>% 
+  group_by (Issue_Day) %>% 
+  filter(is.na(Issue_Day)==F) %>%
+  summarize(n = n()) %>%
+  ggplot() + 
+    geom_col(aes(x = Issue_Day, y = n)) +
+    geom_text(aes(x = Issue_Day, y = n, label = n))
+PC_sql %>% 
+  group_by (Issue_Day) %>% 
+  filter(is.na(Issue_Day)==F) %>%
+  summarize(n = n()) %>%
+  arrange(desc(n)) %>%
+  collect() %>%
+  slice(c(1,n()))
+```
+```{r}
+PC_sql %>% 
+  filter(is.na(Issue_DateTime)==F) %>%
+  arrange(desc(Issue_DateTime)) %>%
+  collect() %>%
+  slice(c(1,n())) %>%
+  select(Issue_Year, Issue_Month, Issue_Day, Issue_Hour, Issue_Minute)
+```
+
+
+
+
 ```{sql connection="citation"}
 SELECT count(*), Issue_Hour FROM latix GROUP BY Issue_Hour
 ORDER BY count(*) DESC LIMIT 1
@@ -128,6 +194,16 @@ ORDER BY count(*) ASC LIMIT 1
 ```
 
 0. Which car makes received most citations?
+```{r}
+PC_sql %>% 
+  group_by (Make) %>% 
+  filter(is.na(Make)==F) %>%
+  summarize(n = n()) %>%
+  arrange(desc(n)) %>%
+  collect() %>%
+  slice(1)
+```
+
 ```{sql connection="citation"}
 SELECT count(*), Make FROM latix 
 WHERE Make IS NOT NULL
@@ -136,6 +212,16 @@ ORDER BY count(*) DESC LIMIT 1
 ```
 
 0. How many different colors of cars were ticketed? Which color attracted most tickets?
+
+```{r}
+PC_sql %>% 
+  group_by (Color) %>% 
+  filter(is.na(Color)==F) %>%
+  summarize(n = n()) %>%
+  arrange(desc(n)) %>%
+  collect()
+```
+
 ```{sql connection="citation"}
 Select Count(*)
 From(
@@ -152,6 +238,17 @@ ORDER BY count(*) DESC LIMIT 1
 ```
 
 0. What are the most common ticket types?
+```{r}
+PC_sql %>% 
+  group_by (Violation_code) %>% 
+  filter(is.na(Violation_code)==F) %>%
+  summarize(n = n()) %>%
+  arrange(desc(n)) %>%
+  collect() %>%
+  slice(1) 
+```
+
+
 ```{sql connection="citation"}
 SELECT count(*), Violation_Code, Violation_Description FROM latix 
 WHERE Violation_Code IS NOT NULL
@@ -160,6 +257,18 @@ ORDER BY count(*) DESC LIMIT 1
 ```
 
 0. How much money was collected on parking tickets in 2016, 2017 and 2018?
+```{r}
+PC_sql %>% 
+  group_by (Issue_Year) %>% 
+  filter(Issue_Year == 2016  | Issue_Year == 2017 | Issue_Year == 2018) %>%
+  summarize(sum.fine=sum(Fine_amount,na.rm=T)) %>%
+  collect() %>%
+  ggplot() + 
+    geom_col(aes(x = Issue_Year, y = sum.fine)) +
+    geom_text(aes(x = Issue_Year, y = sum.fine, label = sum.fine))
+```
+
+
 ```{sql connection="citation"}
 SELECT sum(Fine_amount), Issue_Year FROM latix 
 WHERE Issue_Year == 2016
