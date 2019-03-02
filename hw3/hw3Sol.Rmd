@@ -16,15 +16,7 @@ The `/home/m280data/la_payroll/City_Employee_Payroll.csv` file on teaching serve
 
 
 1. For efficiency of the Shiny app, you should first pre-process, pare down, tidy, and save the data, e.g., as a compressed RDS file, to be used in the app.
-```{r}
-library("readr")
-payroll <- read.csv("/home/m280data/la_payroll/City_Employee_Payroll.csv")
-```
-```{r}
-library("rio")
-export(payroll,"payroll.rds")
-payrolls <- read_rds("payroll.rds")
-```
+
 
 
 0. **Total payroll by LA City**. Visualize the total LA City payroll of each year, with breakdown into base pay, overtime pay, and other pay.
@@ -40,6 +32,9 @@ payrolls <- read_rds("payroll.rds")
 
 0. Publish your Shiny app to <https://www.shinyapps.io> and share the link.
 
+**Solution**
+link: https://huijunan.shinyapps.io/M280HW3Q1_LA_Payroll/
+
 ## Q2 LA City Parking War
 
 The SQLite database `/home/m280data/la_parking/LA_Parking_Citations.sqlite` on teaching server contains information about parking tickets in LA City. It was downloaded from [LA Open Data Portal](https://data.lacity.org/A-Well-Run-City/Parking-Citations/wjz9-h9np). Connect to the database and answer following questions using plots and summary statistics. In this exercise, you are **not** allowed to load whole data into memory. Use the _transform in database, plot in R_ strategy.
@@ -54,8 +49,6 @@ dbListTables(citation)
 
 
 PC_sql <- dplyr::tbl(citation, "latix")
-str(PC_sql)
-PC_sql %>% print(width = Inf)
 ```
 
 1. How many tickets are in this data set? Which time period do these tickets span? Which years have most data?
@@ -72,7 +65,37 @@ PC_sql %>%
     geom_col(aes(x = Issue_Year, y = n))
 ```
 
+```{r}
+PC_sql %>% 
+  filter(is.na(Issue_DateTime)==F) %>%
+  arrange(desc(Issue_DateTime)) %>%
+  collect() %>%
+  slice(c(1,n())) %>%
+  select(Issue_Year, Issue_Month, Issue_Day, Issue_Hour, Issue_Minute)
+```
+
+```{r}
+PC_sql %>% 
+  group_by (Make) %>% 
+  filter(is.na(Make)==F) %>%
+  summarize(n = n()) %>%
+  arrange(desc(n)) %>%
+  collect() %>%
+  slice(1)
+```
+
+**Solution**
+There are 7656418	in this data set. 
+The time span is 07/02/2015 1:00 am to 01/25/2019 23:58 pm.
+And based on the histogram we can tell that Year 2017 has the most data.
+
+
 0. When (which hour, weekday, month day, and month) are you most likely to get a ticket and when are you least likely to get a ticket?
+
+**Solution**
+
+People are mostly likely to get a ticket at 12pm / on a Wednesday / on the 13th / in August; 
+People are least likely to get a ticket at 5am / on a Monday / on the 31st / in Feburary.
 ```{r}
 library(ggplot2)
 PC_sql %>% 
@@ -91,6 +114,8 @@ PC_sql %>%
     geom_col(aes(x = Issue_Wday, y = n)) +
     geom_text(aes(x = Issue_Wday, y = n, label = n))
 
+```
+```{r}
 PC_sql %>% 
   group_by (Issue_Month) %>% 
   filter(is.na(Issue_Month)==F) %>%
@@ -99,6 +124,7 @@ PC_sql %>%
     geom_col(aes(x = Issue_Month, y = n)) +
     geom_text(aes(x = Issue_Month, y = n, label = n))
 ```
+
 ```{r}
 PC_sql %>% 
   group_by (Issue_Day) %>% 
@@ -107,6 +133,8 @@ PC_sql %>%
   ggplot() + 
     geom_col(aes(x = Issue_Day, y = n)) +
     geom_text(aes(x = Issue_Day, y = n, label = n))
+```
+```{r}
 PC_sql %>% 
   group_by (Issue_Day) %>% 
   filter(is.na(Issue_Day)==F) %>%
@@ -115,14 +143,8 @@ PC_sql %>%
   collect() %>%
   slice(c(1,n()))
 ```
-```{r}
-PC_sql %>% 
-  filter(is.na(Issue_DateTime)==F) %>%
-  arrange(desc(Issue_DateTime)) %>%
-  collect() %>%
-  slice(c(1,n())) %>%
-  select(Issue_Year, Issue_Month, Issue_Day, Issue_Hour, Issue_Minute)
-```
+
+
 
 
 
@@ -138,6 +160,8 @@ PC_sql %>%
   slice(1)
 ```
 
+**Solution**
+Toyota is the car make that gets the most citations.
 
 0. How many different colors of cars were ticketed? Which color attracted most tickets?
 
@@ -150,6 +174,8 @@ PC_sql %>%
   collect()
 ```
 
+**Solution**
+Total of 103 colors of cars were tickted and among them the color Black attracted most tickets.
 
 0. What are the most common ticket types?
 ```{r}
@@ -161,7 +187,7 @@ PC_sql %>%
   collect() %>%
   slice(1) 
 ```
-
+**Solution** The most common ticket type has the violation code 80.69BS which stands for NO PARK/STREET CLEAN.
 
 
 0. How much money was collected on parking tickets in 2016, 2017 and 2018?
@@ -176,6 +202,11 @@ PC_sql %>%
     geom_text(aes(x = Issue_Year, y = sum.fine, label = sum.fine))
 ```
 
+**Solution**
+Total of $152145538 were collected in Year 2016, $157122489 were collected in Year 2017 and $138875787 were collected in Year 2018.
+
+
+
 
 
 0. If you've been ticketed in LA County, did you find your ticket in this data set?
@@ -183,5 +214,7 @@ PC_sql %>%
 **Solution**
 Never been ticketed in LA County, Proud of myself!
 
-
+```{r}
+dbDisconnect(citation)
+```
 0. Read the blog <http://www.brettrics.com/9-million-parking-tickets-la/> and try to reproduce plots using your data.
